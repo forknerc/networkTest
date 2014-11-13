@@ -183,9 +183,9 @@ public class UDPReceive : MonoBehaviour {
 	{
 		posMutex.WaitOne();
 		Vector3 ori;
-		ori.x = roll;
-		ori.y = pitch;
-		ori.z = yaw;
+		ori.x = pitch;
+		ori.y = yaw;
+		ori.z = roll;
 		posMutex.ReleaseMutex();
 		
 		return ori;
