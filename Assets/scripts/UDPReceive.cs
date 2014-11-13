@@ -43,6 +43,8 @@ public class UDPReceive : MonoBehaviour {
 	
 	public float x = 0.0f,y  = 0.0f, z = 0.0f;
 
+	public float posScaling;
+
 	
 	// start from shell
 	private static void Main()
@@ -162,9 +164,9 @@ public class UDPReceive : MonoBehaviour {
 	{
 		posMutex.WaitOne();
 		Vector3 pos;
-		pos.x = x;
-		pos.y = y;
-		pos.z = z;
+		pos.x = x * posScaling;
+		pos.y = y * posScaling;
+		pos.z = z * posScaling;
 		posMutex.ReleaseMutex();
 
 		return pos;
