@@ -21,7 +21,11 @@ public class cubeScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+	// update drone position
 	transform.position = UDPScript.getPos();
-	
+
+	// update drone orientation
+	Vector3 ori = UDPScript.getOri();
+	transform.rotation = Quaternion.Euler(ori.x, ori.y, ori.z);	
 	}
 }

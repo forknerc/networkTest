@@ -42,6 +42,7 @@ public class UDPReceive : MonoBehaviour {
 	//public string allReceivedUDPPackets=""; // clean up this from time to time!
 	
 	public float x = 0.0f,y  = 0.0f, z = 0.0f;
+	public float roll = 0.0f, pitch = 0.0f, yaw = 0.0f;
 
 	public float posScaling;
 
@@ -131,9 +132,15 @@ public class UDPReceive : MonoBehaviour {
 				// split message into position vector
 				posMutex.WaitOne();
 				string[] parsed = lastReceivedUDPPacket.Split(' ');
-				x = (float)Convert.ToDouble(parsed[1]);
-				y = (float)Convert.ToDouble(parsed[3]);
-				z = (float)Convert.ToDouble(parsed[5]);
+				if(parsed.Length >= 14)
+					{
+						x = (float)Convert.ToDouble(parsed[1]);
+						y = (float)Convert.ToDouble(parsed[3]);
+						z = (float)Convert.ToDouble(parsed[5]);
+						roll = (float)Convert.ToDouble(parsed[7]);
+						pitch = (float)Convert.ToDouble(parsed[9]);
+						yaw = (float)Convert.ToDouble(parsed[11]);
+					}
 				posMutex.ReleaseMutex();
 				
 			}
@@ -170,6 +177,18 @@ public class UDPReceive : MonoBehaviour {
 		posMutex.ReleaseMutex();
 
 		return pos;
+	}
+
+	public Vector3 getOri()
+	{
+		posMutex.WaitOne();
+		Vector3 ori;
+		ori.x = roll;
+		ori.y = pitch;
+		ori.z = yaw;
+		posMutex.ReleaseMutex();
+		
+		return ori;
 	}
 
 }
