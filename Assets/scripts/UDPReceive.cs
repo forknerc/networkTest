@@ -48,7 +48,7 @@ public class UDPReceive : MonoBehaviour {
 
 	
 	// start from shell
-	private static void Main()
+	/*private static void Main()
 	{
 		UDPReceive receiveObj=new UDPReceive();
 		receiveObj.init();
@@ -59,7 +59,7 @@ public class UDPReceive : MonoBehaviour {
 			text = Console.ReadLine();
 		}
 		while(!text.Equals("exit"));
-	}
+	}*/
 	// start from unity3d
 	public void Start()
 	{
@@ -83,14 +83,14 @@ public class UDPReceive : MonoBehaviour {
 	private void init()
 	{
 		// Endpunkt definieren, von dem die Nachrichten gesendet werden.
-		print("UDPSend.init()");
+		//print("UDPSend.init()");
 		
 		// define port
 		port = 8051;
 		
 		// status
-		print("Sending to 127.0.0.1 : "+port);
-		print("Test-Sending to this Port: nc -u 127.0.0.1  "+port+"");
+		//print("Sending to 127.0.0.1 : "+port);
+		//print("Test-Sending to this Port: nc -u 127.0.0.1  "+port+"");
 		
 		
 		// ----------------------------
@@ -124,7 +124,7 @@ public class UDPReceive : MonoBehaviour {
 				
 				// Den abgerufenen Text anzeigen.
 				print(">> " + text);
-				Debug.Log(text);
+				//Debug.Log(text);
 				
 				// latest UDPpacket
 				lastReceivedUDPPacket=text;
