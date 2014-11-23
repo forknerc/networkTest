@@ -6,7 +6,7 @@ public class input : MonoBehaviour {
 	private Vector3 pos;
 
 	public GameObject sMgr;
-	public selectionManager sMgrScript;
+	public selectionManager sMgrS;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +16,7 @@ public class input : MonoBehaviour {
 		pos.z = 0;
 
 		sMgr = GameObject.Find("selectionMgr");
-		sMgrScript = sMgrScript.GetComponent<selectionManager>();
+		sMgrS = sMgr.GetComponent<selectionManager>();
 
 
 
@@ -33,13 +33,16 @@ public class input : MonoBehaviour {
 		
 				if(Physics.Raycast(ray,out hit,Mathf.Infinity))
 					{
-						if(hit.collider.name == "QuadCopter1")
+						if(hit.collider.name == "droneUnit1")
 							{
 								Debug.Log("hit drone");
+								sMgrS.addUnitToSelected(GameObject.Find("droneUnit1"));
+								
 							}
 						else 
 							{
 								Debug.Log("hit ground");
+								sMgrS.deselectAll();
 							}
 						pos = hit.point;
 						//Debug.Log(hit.point);

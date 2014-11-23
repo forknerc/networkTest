@@ -12,7 +12,7 @@ public class cubeScript : MonoBehaviour {
 	void Start () {
 	
 
-		//netReader = FindObjectOfType(typeof(UDPReceive));
+		//netReader = FindObjectOfType(typeof(UDPReceive)); 
 		UDPobj = GameObject.Find("networkControl");
 		UDPScript = UDPobj.GetComponent<UDPReceive>();
 
@@ -27,5 +27,10 @@ public class cubeScript : MonoBehaviour {
 	// update drone orientation
 	Vector3 ori = UDPScript.getOri();
 	transform.rotation = Quaternion.Euler(ori.x, ori.y, ori.z);	
+	}
+
+	void drawBoundingBox() {
+	
+		
 	}
 }

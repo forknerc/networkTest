@@ -14,5 +14,20 @@ public class selectionManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		foreach(GameObject unit in selectedUnits)
+		{
+			unit.GetComponent<droneUnit>().drawBoundingBox();
+		}
+
+	}
+
+	public void addUnitToSelected(GameObject unit){
+
+		selectedUnits.Add(unit);
+	}
+
+	public void deselectAll() {
+
+		selectedUnits.Clear();
 	}
 }
