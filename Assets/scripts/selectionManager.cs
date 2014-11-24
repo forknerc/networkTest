@@ -16,7 +16,7 @@ public class selectionManager : MonoBehaviour {
 	
 		foreach(GameObject unit in selectedUnits)
 		{
-			unit.GetComponent<droneUnit>().drawBoundingBox();
+			unit.GetComponent<droneUnit>().isSelected = true;
 		}
 
 	}
@@ -27,6 +27,11 @@ public class selectionManager : MonoBehaviour {
 	}
 
 	public void deselectAll() {
+
+		foreach(GameObject unit in selectedUnits)
+		{
+			unit.GetComponent<droneUnit>().isSelected = false;
+		}
 
 		selectedUnits.Clear();
 	}

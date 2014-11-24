@@ -7,6 +7,9 @@ public class droneUnit : MonoBehaviour {
 	
 	public GameObject UDPobj;
 	public UDPReceive UDPScript;
+	public GameObject myCircle;
+
+	public bool isSelected;
 	
 	// Use this for initialization
 	void Start () {
@@ -15,6 +18,10 @@ public class droneUnit : MonoBehaviour {
 		//netReader = FindObjectOfType(typeof(UDPReceive)); 
 		UDPobj = GameObject.Find("networkControl");
 		UDPScript = UDPobj.GetComponent<UDPReceive>();
+
+		myCircle = GameObject.Find("selectionCircle1");
+
+		isSelected = false;
 		
 	}
 	
@@ -27,19 +34,17 @@ public class droneUnit : MonoBehaviour {
 		// update drone orientation
 		Vector3 ori = UDPScript.getOri();
 		transform.rotation = Quaternion.Euler(ori.x, ori.y, ori.z);	
+
+
+		if(isSelected)
+			{
+				myCircle.gameObject.SetActive(true);
+			}
+		else 
+			{
+				myCircle.gameObject.SetActive(false);
+			}
+				
 	}
 	
-	public void drawBoundingBox() {
-		
-		//Debug.Log("drawing bounding box");
-		//Gizmos.DrawWireCube(transform.position, new Vector3(0.5f, 0.5f, 0.5f));
-		//OnDrawGizmos();
-		
-		
-	}
-
-	void OnDrawGizmos() {
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireCube(transform.position, new Vector3(1f, 1f, 1f));
-	}
 }
