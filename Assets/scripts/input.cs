@@ -25,15 +25,17 @@ public class input : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+		
 		if(Input.GetMouseButtonDown(0))
 			{
-				Ray ray;
-				RaycastHit hit;
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Ray rayL;
+				RaycastHit hitL;
+				rayL = Camera.main.ScreenPointToRay(Input.mousePosition);
 		
-				if(Physics.Raycast(ray,out hit,Mathf.Infinity))
+				if(Physics.Raycast(rayL,out hitL,Mathf.Infinity))
 					{
-						if(hit.collider.name == "droneUnit1")
+						if(hitL.collider.name == "droneUnit1")
 							{
 								Debug.Log("hit drone");
 								sMgrS.addUnitToSelected(GameObject.Find("droneUnit1"));
@@ -44,12 +46,22 @@ public class input : MonoBehaviour {
 								Debug.Log("hit ground");
 								sMgrS.deselectAll();
 							}
-						pos = hit.point;
-						//Debug.Log(hit.point);
-						//Debug.DrawLine(ray.origin, hit.point, Color.red);
+						pos = hitL.point;
 					}
 			}
-
+		if(Input.GetMouseButtonDown(1))
+			{
+				Ray rayR;
+				RaycastHit hitR;
+				rayR = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Physics.Raycast(rayR,out hitR,Mathf.Infinity);
+				if(sMgrS.unitsSelected())
+					{
+						pos = hitR.point;
+						//string msg = "c goto ";
+					}
+			}
+		
 	}
 	void OnGUI()
 	{

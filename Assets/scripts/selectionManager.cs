@@ -35,4 +35,14 @@ public class selectionManager : MonoBehaviour {
 
 		selectedUnits.Clear();
 	}
+
+	public bool unitsSelected() {
+
+		int count = selectedUnits.Count;
+		if(count > 0)
+			{
+				return true;
+			}
+		return false;
+	}
 }
