@@ -8,6 +8,9 @@ public class input : MonoBehaviour {
 	public GameObject sMgr;
 	public selectionManager sMgrS;
 
+	public GameObject nMgr;
+	public UDPsend sendUDP;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -18,15 +21,13 @@ public class input : MonoBehaviour {
 		sMgr = GameObject.Find("selectionMgr");
 		sMgrS = sMgr.GetComponent<selectionManager>();
 
-
-
+		nMgr = GameObject.Find("networkControl");
+		sendUDP = nMgr.GetComponent<UDPsend>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
-		
 		if(Input.GetMouseButtonDown(0))
 			{
 				Ray rayL;
@@ -58,18 +59,22 @@ public class input : MonoBehaviour {
 				if(sMgrS.unitsSelected())
 					{
 						pos = hitR.point;
-						//string msg = "c goto ";
+						if(pos.x < 1.8 && pos.x > -1.8 && pos.z < 1.0 && pos.z > -1.0)
+							{
+								foreach(GameObject unit in sMgrS.selectedUnits)
+									{
+										unit.GetComponent<droneUnit>().sendCommand(pos);
+									}
+							}
+						else 
+							{
+								Debug.Log("move out of bounds");
+							}
 					}
+				else
+					{
+						Debug.Log("no units selected to move");
+					}		
 			}
-		
-	}
-	void OnGUI()
-	{
-		Rect rectObj=new Rect(40,10,200,400);
-		GUIStyle style = new GUIStyle();
-		style.alignment = TextAnchor.LowerLeft;
-		GUI.Box(rectObj,"clicked at " + pos
-		        ,style);
-	}
-
+		}
 }

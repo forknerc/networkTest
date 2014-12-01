@@ -6,8 +6,10 @@ public class droneUnit : MonoBehaviour {
 	private UDPReceive netReader;
 	
 	public GameObject UDPobj;
-	public UDPReceive UDPScript;
+	 UDPReceive UDPrecieve;
 	public GameObject myCircle;
+
+	UDPsend sendUDP;
 
 	public bool isSelected;
 	
@@ -17,11 +19,13 @@ public class droneUnit : MonoBehaviour {
 		
 		//netReader = FindObjectOfType(typeof(UDPReceive)); 
 		UDPobj = GameObject.Find("networkControl");
-		UDPScript = UDPobj.GetComponent<UDPReceive>();
-
+		UDPrecieve = UDPobj.GetComponent<UDPReceive>();
+		sendUDP = UDPobj.GetComponent<UDPsend>();
 		myCircle = GameObject.Find("selectionCircle1");
 
 		isSelected = false;
+
+		// TODO - send initialization to drone
 		
 	}
 	
@@ -29,10 +33,10 @@ public class droneUnit : MonoBehaviour {
 	void Update () {
 		
 		// update drone position
-		transform.position = UDPScript.getPos();
+		transform.position = UDPrecieve.getPos();
 		
 		// update drone orientation
-		Vector3 ori = UDPScript.getOri();
+		Vector3 ori = UDPrecieve.getOri();
 		transform.rotation = Quaternion.Euler(ori.x, ori.y, ori.z);	
 
 
@@ -43,8 +47,13 @@ public class droneUnit : MonoBehaviour {
 		else 
 			{
 				myCircle.gameObject.SetActive(false);
-			}
-				
+			}		
 	}
-	
+
+	public void sendCommand(Vector3 pos)
+	{
+		string msg = "c goto " + pos.x + " " + pos.z + " " + transform.position.y + " 0";
+		sendUDP.sendString(msg);
+		Debug.Log("sent msg: " + msg);
+	}
 }

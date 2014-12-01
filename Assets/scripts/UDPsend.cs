@@ -21,7 +21,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-public class UDPSend : MonoBehaviour
+public class UDPsend : MonoBehaviour
 {
 	private static int localPort;
 	
@@ -46,7 +46,7 @@ public class UDPSend : MonoBehaviour
 	public void init()
 	{
 		//
-		print("UDPSend.init()");
+		//print("UDPSend.init()");
 		
 		// define send location
 		IP="134.197.41.35";
@@ -59,8 +59,8 @@ public class UDPSend : MonoBehaviour
 		client = new UdpClient();
 		
 		// status
-		print("Sending to "+IP+" : "+port);
-		print("Testing: nc -lu "+IP+" : "+port);
+		//print("Sending to "+IP+" : "+port);
+		//print("Testing: nc -lu "+IP+" : "+port);
 		
 	}
 	
